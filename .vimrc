@@ -1,34 +1,125 @@
-" Get the defaults that most users want.
-source $VIMRUNTIME/defaults.vim
-
-set nobackup	" do not keep a backup file, use versions instead
-set undofile	" keep an undo file (undo changes after closing)
-
-" Switch on highlighting the last used search pattern.
-set hlsearch
-set incsearch 
-
-" Put these in an autocmd group, so that we can delete them easily.
-augroup vimrcEx
-  au!
-
-  " For all text files set 'textwidth' to 78 characters.
-  autocmd FileType text setlocal textwidth=78
-augroup END
-
-" Add optional packages.
-"
-" The matchit plugin makes the % command work better, but it is not backwards
-" compatible.
-" The ! means the package won't be loaded right away but when plugins are
-" loaded during initialization.
-if has('syntax') && has('eval')
-  packadd! matchit
-endif
-
-set sidescroll=10
-
+" Plugins {{{
+" Plugins will be downloaded under the specified directory.
+call plug#begin('~/.vim/plugged')
+" Declare the list of plugins.
+Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf.vim'
+Plug 'sjl/gundo.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'vim-airline/vim-airline'
+Plug 'tpope/vim-fugitive'
+"Plug 'gitgutter/Vim'
+Plug 'airblade/vim-gitgutter'
+" List ends here. Plugins become visible to Vim after this call.
+call plug#end()
+" }}}
+" GitGutter {{{
+set updatetime=100
+" }}}
+" Airline {{{
+let g:airline_powerline_fonts = 1 " populate airline icons with powerine-font icons
+" }}}
+" Colors {{{
+colorscheme apprentice " set color scheme
+"colorscheme badwolf
+syntax enable " enable syntax processing
+" }}}
+" Spaces & Tabs {{{
+set tabstop=2 " number of visual spaces per TAB
+set softtabstop=2 " number of spaces in tab when editing
+"set expandtab " tabs are spraces
+set breakindent " start line wraps indneted
+let showbreak='  ' " add two spaces infront ofeach linebreak
+filetype indent on " load filetype-specific indent files
+" }}}
+" UI Config {{{
+set number " show line numbers
+set relativenumber " show relative line numbers
+set showcmd " shows command in bottom bar
+set cursorline " highlight current line
+set scrolloff=999 " number of screen lines to keep above and below the cursor
+set sidescrolloff=999 " number of screen columns to keep left and right of the cursor
+set wildmenu " visual autocomplete for command menu
+set lazyredraw " redraw only when we need to
+set showmatch " highlight matching [{()}]
+" }}}
+" Searching {{{
+set incsearch " search as characters are entered
+set hlsearch " highlight matches
+set ignorecase " ignore capital letters
+set smartcase " do not ignore intentionally cased searches
+" turn off search highlight
+nnoremap <leader><space> :nohlsearch<CR>
+" }}}
+" Folding {{{
+set foldenable " enable folding
+set foldlevelstart=1 " open most folds by default
+set foldnestmax=2 " 10 nested fold max
+set foldmethod=indent "fold based on indent level
+" bind space to open/close folds
+noremap <space> za
+" }}}
+" Movement {{{
+" move vertically by visual line (won't skip wrapped lines)
+nnoremap j gj
+nnoremap k gk
+" highlight last inserted text
+nnoremap gV `[v`]
+" }}}
+" Fzf {{{
 noremap <C-p> :Files<CR>
+noremap <C-t> :Tags<CR>
+" }}}
+" Leader Shortcuts {{{
+" leader is comma"
+let mapleader="," 
+" jk is escape
+inoremap jk <esc>
+" tab movement
+nnoremap <C-l> :tabn<CR>
+nnoremap <C-h> :tabp<CR>
+nnoremap <C-n> :tabe<CR>
+" bind ,u to gundo's undo tree
+nnoremap <leader>u :GundoToggle<CR>
+" save session (current windows), reopen with vim -S
+nnoremap <leader>s :mksession!<CR>
+" keybind for opening .vimrc
+nnoremap <leader>ev :vsp $MYVIMRC<CR>
+" keybind for reloading .vimrc
+nnoremap <leader>sv :source $MYVIMRC<CR>
+" toggle relative line numbers
+nnoremap <leader>n :call ToggleNumber()<CR>
+" toggle tab list
+nnoremap <leader>i :call ToggleList()<CR>
+" }}}
+" Functions {{{
+" toggle between number and relativenumber
+function! ToggleNumber()
+    if(&relativenumber == 1)
+        set norelativenumber
+        set number
+    else
+        set relativenumber
+    endif
+endfunc
+" toggle tab list 
+function! ToggleList()
+    if(&list == 1)
+        set nolist
+    else
+        set list
+    endif
+endfunc
+" }}}
+" Andres Shit {{{
+" Fzf.vim fuzzy file search
+noremap <C-p> :Files<CR> 
+" NERDTree keybinds
 noremap <C-o> :NERDTreeToggle %<CR>
 noremap <C-f> :NERDTreeFind<CR>
-noremap <C-i> :IndentGuidesToggle<CR>
+" }}}
+" Arnes Shit {{{
+set mouse=a " enable mouse
+set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣ "set indentation highlight characters
+" }}}
+" vim:foldmethod=marker:foldlevel=0
