@@ -6,7 +6,6 @@
 [[ $- != *i* ]] && return
 
 PS1='[\u@\h \W]\$ '
-(cat ~/.cache/wal/sequences &)
 
 alias ls='ls --color=auto'
 alias l='ls -l'
