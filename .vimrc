@@ -27,10 +27,13 @@ syntax enable " enable syntax processing
 " Spaces & Tabs {{{
 set tabstop=2 " number of visual spaces per TAB
 set softtabstop=2 " number of spaces in tab when editing
-"set expandtab " tabs are spraces
+set shiftwidth=2 " number of spaces when shifting whole lines left/right
+set smarttab " ???
+"set expandtab " tabs are spaces
 set breakindent " start line wraps indneted
 let showbreak='  ' " add two spaces infront ofeach linebreak
 filetype indent on " load filetype-specific indent files
+set smartindent " do smart autoindenting when starting a new line
 " }}}
 " UI Config {{{
 set number " show line numbers
@@ -48,14 +51,13 @@ set incsearch " search as characters are entered
 set hlsearch " highlight matches
 set ignorecase " ignore capital letters
 set smartcase " do not ignore intentionally cased searches
-" turn off search highlight
-nnoremap <leader><space> :nohlsearch<CR>
 " }}}
 " Folding {{{
 set foldenable " enable folding
 set foldlevelstart=1 " open most folds by default
-set foldnestmax=2 " 10 nested fold max
-set foldmethod=indent "fold based on indent level
+set foldnestmax=0 " 10 nested fold max
+set foldmethod=marker "fold based on { } level
+set foldmarker={,}
 " bind space to open/close folds
 noremap <space> za
 " }}}
@@ -79,6 +81,8 @@ inoremap jk <esc>
 nnoremap <C-l> :tabn<CR>
 nnoremap <C-h> :tabp<CR>
 nnoremap <C-n> :tabe<CR>
+" turn off search highlight
+nnoremap <leader><space> :nohlsearch<CR>
 " bind ,u to gundo's undo tree
 nnoremap <leader>u :GundoToggle<CR>
 " save session (current windows), reopen with vim -S
