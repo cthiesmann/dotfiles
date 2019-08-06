@@ -201,7 +201,7 @@ exec --no-startup-id xauthlock -time 10 -locker i3lock
 bindsym $mod+Alt_L exec i3lock
 
 # pywal use last color scheme
-exec wal -R -n
+#exec wal -R -n
 
 # feh background image
 exec ~/.fehbg &
