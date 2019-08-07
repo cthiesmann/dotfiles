@@ -92,9 +92,9 @@ set completeopt=menuone,noinsert
 " Bind CTRL SPACE to open completion popup
 inoremap <C-@> <C-x><C-o>
 " Bind ENTER to insert completion entry
-inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<c-g>u\<CR>"
 "Bind SPACE to insert completion  entry
-inoremap <expr> <SPACE> pumvisible() ? "\<C-y>" : "\<SPACE>"
+inoremap <expr> <SPACE> pumvisible() ? "\<C-y>" : "\<c-g>u\<SPACE>"
 " Bind ESC to close popup
 inoremap <expr> <Esc> pumvisible() ? "\<C-e>" : "\<C-g>u\<CR>"
 " }}}
