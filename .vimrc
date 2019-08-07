@@ -8,8 +8,9 @@ Plug 'sjl/gundo.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'vim-airline/vim-airline'
 Plug 'tpope/vim-fugitive'
-"Plug 'gitgutter/Vim'
 Plug 'airblade/vim-gitgutter'
+Plug 'majutsushi/tagbar'
+Plug 'mbbill/code_complete'
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
 " }}}
@@ -34,6 +35,7 @@ set breakindent " start line wraps indneted
 let showbreak='  ' " add two spaces infront ofeach linebreak
 filetype indent on " load filetype-specific indent files
 set smartindent " do smart autoindenting when starting a new line
+set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣ "set indentation highlight characters
 " }}}
 " UI Config {{{
 set number " show line numbers
@@ -45,6 +47,7 @@ set sidescrolloff=999 " number of screen columns to keep left and right of the c
 set wildmenu " visual autocomplete for command menu
 set lazyredraw " redraw only when we need to
 set showmatch " highlight matching [{()}]
+set mouse=a " enable mouse
 " }}}
 " Searching {{{
 set incsearch " search as characters are entered
@@ -59,28 +62,53 @@ set foldnestmax=0 " 10 nested fold max
 set foldmethod=marker "fold based on { } level
 set foldmarker={,}
 " bind space to open/close folds
-noremap <space> za
+nnoremap <space> za
 " }}}
 " Movement {{{
+" jk is escape
+inoremap jk <esc>
 " move vertically by visual line (won't skip wrapped lines)
 nnoremap j gj
 nnoremap k gk
 " highlight last inserted text
 nnoremap gV `[v`]
 " }}}
+" Tags {{{
+"nnoremap <C-i> :tag *<CR>
+"nnoremap <C-o> :pop<CR>
+" }}}
 " Fzf {{{
-noremap <C-p> :Files<CR>
+" Fuzzy file search
+noremap <C-f> :Files<CR>
+" Fuzzy tag search
 noremap <C-t> :Tags<CR>
+" }}}
+" Omnicomplete {{{
+" Enable filetype syntax completion
+filetype plugin on
+set omnifunc=syntaxcomplete#Complete
+" Show popup even if only one match was found & don't auto insert
+set completeopt=menuone,noinsert
+" Bind CTRL SPACE to open completion popup
+inoremap <C-@> <C-x><C-o>
+" Bind ENTER to insert completion entry
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+"Bind SPACE to insert completion  entry
+inoremap <expr> <SPACE> pumvisible() ? "\<C-y>" : "\<SPACE>"
+" Bind ESC to close popup
+inoremap <expr> <Esc> pumvisible() ? "\<C-e>" : "\<C-g>u\<CR>"
+" }}}
+" Tab movement {{{
+nnoremap <C-l> :tabn<CR>
+nnoremap <C-h> :tabp<CR>
+nnoremap <C-n> :tabe<CR>
 " }}}
 " Leader Shortcuts {{{
 " leader is comma"
 let mapleader="," 
-" jk is escape
-inoremap jk <esc>
-" tab movement
-nnoremap <C-l> :tabn<CR>
-nnoremap <C-h> :tabp<CR>
-nnoremap <C-n> :tabe<CR>
+" NERDTree keybinds
+nnoremap <leader>f :NERDTreeToggle<CR>
+nnoremap <leader>o :NERDTreeFind<CR>
 " turn off search highlight
 nnoremap <leader><space> :nohlsearch<CR>
 " bind ,u to gundo's undo tree
@@ -93,8 +121,10 @@ nnoremap <leader>ev :vsp $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 " toggle relative line numbers
 nnoremap <leader>n :call ToggleNumber()<CR>
-" toggle tab list
+" toggle indentation characters
 nnoremap <leader>i :call ToggleList()<CR>
+" toggle tag bar
+nnoremap <leader>t :TagbarToggle<CR>
 " }}}
 " Functions {{{
 " toggle between number and relativenumber
@@ -114,16 +144,11 @@ function! ToggleList()
         set list
     endif
 endfunc
+" Start omnicomplete on keypress
+function! OpenCompletion()
+    if !pumvisible() && ((v:char >= 'a' && v:char <= 'z') || (v:char >= 'A' && v:char <= 'Z'))
+        call feedkeys("\<C-x>\<C-o>", "n")
+    endif
+endfunction
 " }}}
-" Andres Shit {{{
-" Fzf.vim fuzzy file search
-noremap <C-p> :Files<CR> 
-" NERDTree keybinds
-noremap <C-o> :NERDTreeToggle %<CR>
-noremap <C-f> :NERDTreeFind<CR>
-" }}}
-" Arnes Shit {{{
-set mouse=a " enable mouse
-set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣ "set indentation highlight characters
-" }}}
-" vim:foldmethod=marker:foldlevel=0
+" vim:foldmethod=marker:foldlevel=0:foldmarker={{{,}}}
