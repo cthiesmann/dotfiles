@@ -11,9 +11,15 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'majutsushi/tagbar'
 Plug 'mbbill/code_complete'
+Plug 'dense-analysis/ale'
+Plug 'craigemery/vim-autotag'
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
 " }}}
+
+let g:ale_linters = {
+\   'php': ['php'],
+			\}
 " GitGutter {{{
 set updatetime=100
 " }}}
@@ -32,7 +38,8 @@ set shiftwidth=2 " number of spaces when shifting whole lines left/right
 set smarttab " ???
 "set expandtab " tabs are spaces
 set breakindent " start line wraps indneted
-let showbreak='  ' " add two spaces infront ofeach linebreak
+"add two spaces infront ofeach linebreak
+set showbreak=↳\ 
 filetype indent on " load filetype-specific indent files
 set smartindent " do smart autoindenting when starting a new line
 set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣ "set indentation highlight characters
@@ -125,6 +132,8 @@ nnoremap <leader>n :call ToggleNumber()<CR>
 nnoremap <leader>i :call ToggleList()<CR>
 " toggle tag bar
 nnoremap <leader>t :TagbarToggle<CR>
+" toggle gitgutter fold
+nnoremap <leader>h<space> :GitGutterFold<CR>
 " }}}
 " Functions {{{
 " toggle between number and relativenumber
