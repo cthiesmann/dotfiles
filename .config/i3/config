@@ -42,6 +42,14 @@ bindsym $mod+Shift+q kill
 # from the generated scheme.
 # NOTE: The '#f0f0f0' in the lines below is the color i3 will use if
 # it fails to get colors from Xresources.
+set_from_resource $color15 i3wm.color15 #f0f0f0
+set_from_resource $color14 i3wm.color14 #f0f0f0
+set_from_resource $color13 i3wm.color12 #f0f0f0
+set_from_resource $color12 i3wm.color12 #f0f0f0
+set_from_resource $color11 i3wm.color11 #f0f0f0
+set_from_resource $color10 i3wm.color10 #f0f0f0
+set_from_resource $color9 i3wm.color9 #f0f0f0
+set_from_resource $color8 i3wm.color8 #f0f0f0
 set_from_resource $color7 i3wm.color7 #f0f0f0
 set_from_resource $color6 i3wm.color6 #f0f0f0
 set_from_resource $color5 i3wm.color5 #f0f0f0
@@ -51,11 +59,11 @@ set_from_resource $color2 i3wm.color2 #f0f0f0
 set_from_resource $color1 i3wm.color1 #f0f0f0
 set_from_resource $color0 i3wm.color0 #f0f0f0
 
-set_from_resource $fg i3wm.color7 #f0f0f0
-set_from_resource $bg i3wm.color1 #f0f0f0
+set_from_resource $fg i3wm.foreground #f0f0f0
+set_from_resource $bg i3wm.background #f0f0f0
 
 # class                 border  backgr. text indicator 	child_border
-client.focused          $fg     $fg     $bg  $fg	$fg
+client.focused          $color5     $bg     $bg  $color5				$color5
 client.focused_inactive $bg     $bg     $fg  $bg       	$bg
 client.unfocused        $bg     $bg     $fg  $bg       	$bg
 client.urgent           $bg     $bg     $fg  $bg       	$bg
@@ -180,10 +188,8 @@ bar {
         status_command i3status
 	colors {
         	background $bg
-        	statusline $color7 
-        	focused_workspace  $color1 $color7 
-       		inactive_workspace $color1 $color4 $color7
-		urgent_workspace   $color1 $color2
+        	statusline $fg 
+        	focused_workspace  $color5 $color3 $fg 
     	}
 }
 
@@ -207,7 +213,7 @@ bindsym $mod+Alt_L exec i3lock
 exec ~/.fehbg &
 
 # i3 gaps
-gaps inner 10
+gaps inner 0
 gaps outer 0
 smart_gaps on
 
