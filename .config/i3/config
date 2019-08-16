@@ -63,7 +63,7 @@ set_from_resource $fg i3wm.foreground #f0f0f0
 set_from_resource $bg i3wm.background #f0f0f0
 
 # class                 border  backgr. text indicator 	child_border
-client.focused          $color5     $bg     $bg  $color5				$color5
+client.focused          $color5     $bg     $foreground  $color5				$color5
 client.focused_inactive $bg     $bg     $fg  $bg       	$bg
 client.unfocused        $bg     $bg     $fg  $bg       	$bg
 client.urgent           $bg     $bg     $fg  $bg       	$bg
@@ -203,8 +203,9 @@ exec pasystray
 exec setxkbmap us
 
 # i3lock
-exec --no-startup-id xauthlock -time 10 -locker i3lock
-bindsym $mod+Alt_L exec i3lock
+exec --no-startup-id xauthlock -time 10 -locker i3lock -i ~/Downloads/desktop.png
+
+bindsym $mod+Mod1+l exec i3lock -i ~/Downloads/desktop.png
 
 # pywal use last color scheme
 #exec wal -R -n
