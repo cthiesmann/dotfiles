@@ -221,5 +221,8 @@ smart_gaps on
 # keepass
 bindsym $mod+Shift+Return exec keepass --auto-type
 
+# scrot
+bindsym Print --release exec bash -ic scrotclip 
+
 # dunst
 exec dunst
