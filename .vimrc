@@ -1,25 +1,38 @@
+" Get the defaults that most users want.
+source $VIMRUNTIME/defaults.vim
 " Plugins {{{
 " Plugins will be downloaded under the specified directory.
 call plug#begin('~/.vim/plugged')
 " Declare the list of plugins.
+" Fuzzy search
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
+" Undo tree visualization
 Plug 'sjl/gundo.vim'
+" File tree
 Plug 'scrooloose/nerdtree'
+" Status bar
 Plug 'vim-airline/vim-airline'
 Plug 'tpope/vim-fugitive'
+" Git commands and highlighting
 Plug 'airblade/vim-gitgutter'
+" Class outline viewer
 Plug 'majutsushi/tagbar'
+" Code completion and snippets
 Plug 'mbbill/code_complete'
+" Lint support
 Plug 'dense-analysis/ale'
+" Autotag, automatically update ctags on save
 Plug 'craigemery/vim-autotag'
+" Spacegray colorscheme
+Plug 'ajh17/Spacegray.vim'
+" JSON syntax support
+Plug 'leshill/vim-json'
+" Better javasctipt highlighting
+Plug 'pangloss/vim-javascript'
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
 " }}}
-
-let g:ale_linters = {
-\   'php': ['php'],
-			\}
 " GitGutter {{{
 set updatetime=100
 " }}}
@@ -27,6 +40,11 @@ set updatetime=100
 let g:airline_powerline_fonts = 1 " populate airline icons with powerine-font icons
 " }}}
 " Colors {{{
+set termguicolors
+"colorscheme spacegray
+"let g:spacegray_underline_search = 1
+"let g:spacegray_use_italics = 1
+"let g:spacegray_low_contrast = 1
 colorscheme apprentice " set color scheme
 "colorscheme badwolf
 syntax enable " enable syntax processing
@@ -66,10 +84,15 @@ set smartcase " do not ignore intentionally cased searches
 set foldenable " enable folding
 set foldlevelstart=1 " open most folds by default
 set foldnestmax=0 " 10 nested fold max
-set foldmethod=marker "fold based on { } level
-set foldmarker={,}
+set foldmethod=syntax "fold based on { } level
+"set foldmarker={,}
 " bind space to open/close folds
 nnoremap <space> za
+" Enable javasctipt folding
+augroup javascript_folding
+    au!
+    au FileType javascript setlocal foldmethod=syntax
+augroup END
 " }}}
 " Movement {{{
 " jk is escape
