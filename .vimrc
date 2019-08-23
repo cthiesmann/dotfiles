@@ -30,6 +30,8 @@ Plug 'ajh17/Spacegray.vim'
 Plug 'leshill/vim-json'
 " Better javasctipt highlighting
 Plug 'pangloss/vim-javascript'
+" Intellisense integration
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
 " }}}
