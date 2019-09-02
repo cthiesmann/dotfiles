@@ -226,3 +226,6 @@ bindsym Print --release exec bash -ic scrotclip
 
 # dunst
 exec dunst
+
+# always ontop
+bindsym $mod+t sticky toggle
