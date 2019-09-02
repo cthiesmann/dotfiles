@@ -13,7 +13,9 @@ source /home/christopher/.fzf-key-bindings.bash
 alias fe='vim $(fzf)'
 
 alias ls='ls --color=auto'
+alias lsa='ls --color=auto -a'
 alias l='ls -l --color=auto'
+alias la='ls -l --color=auto -a'
 
 alias please='sudo'
 alias pls='sudo'
