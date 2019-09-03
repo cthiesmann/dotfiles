@@ -66,13 +66,13 @@ set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣ "set indenta
 " }}}
 " UI Config {{{
 set number " show line numbers
-set relativenumber " show relative line numbers
+"set relativenumber " show relative line numbers
 set showcmd " shows command in bottom bar
 set cursorline " highlight current line
 set scrolloff=999 " number of screen lines to keep above and below the cursor
 set sidescrolloff=999 " number of screen columns to keep left and right of the cursor
 set wildmenu " visual autocomplete for command menu
-set lazyredraw " redraw only when we need to
+"set lazyredraw " redraw only when we need to
 set showmatch " highlight matching [{()}]
 set mouse=a " enable mouse
 " }}}
@@ -85,16 +85,11 @@ set smartcase " do not ignore intentionally cased searches
 " Folding {{{
 set foldenable " enable folding
 set foldlevelstart=1 " open most folds by default
-set foldnestmax=0 " 10 nested fold max
+set foldnestmax=2 " 10 nested fold max
 set foldmethod=syntax "fold based on { } level
 "set foldmarker={,}
 " bind space to open/close folds
 nnoremap <space> za
-" Enable javasctipt folding
-augroup javascript_folding
-    au!
-    au FileType javascript setlocal foldmethod=syntax
-augroup END
 " }}}
 " Movement {{{
 " jk is escape
@@ -102,12 +97,8 @@ inoremap jk <esc>
 " move vertically by visual line (won't skip wrapped lines)
 nnoremap j gj
 nnoremap k gk
-" highlight last inserted text
-nnoremap gV `[v`]
-" }}}
-" Tags {{{
-"nnoremap <C-i> :tag *<CR>
-"nnoremap <C-o> :pop<CR>
+vnoremap j gj
+vnoremap k gk
 " }}}
 " Fzf {{{
 " Fuzzy file search
@@ -120,15 +111,9 @@ noremap <C-t> :Tags<CR>
 filetype plugin on
 set omnifunc=syntaxcomplete#Complete
 " Show popup even if only one match was found & don't auto insert
-set completeopt=menuone,noinsert
+set completeopt=menuone ",noinsert
 " Bind CTRL SPACE to open completion popup
 inoremap <C-@> <C-x><C-o>
-" Bind ENTER to insert completion entry
-inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<c-g>u\<CR>"
-"Bind SPACE to insert completion  entry
-inoremap <expr> <SPACE> pumvisible() ? "\<C-y>" : "\<c-g>u\<SPACE>"
-" Bind ESC to close popup
-inoremap <expr> <Esc> pumvisible() ? "\<C-e>" : "\<C-g>u\<CR>"
 " }}}
 " Tab movement {{{
 nnoremap <C-l> :tabn<CR>
@@ -178,11 +163,28 @@ function! ToggleList()
         set list
     endif
 endfunc
-" Start omnicomplete on keypress
-function! OpenCompletion()
-    if !pumvisible() && ((v:char >= 'a' && v:char <= 'z') || (v:char >= 'A' && v:char <= 'Z'))
-        call feedkeys("\<C-x>\<C-o>", "n")
-    endif
+" }}}
+" coc.nvim {{{
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" Remap for rename current word
+nmap <leader>rn <Plug>(coc-rename)
 " }}}
 " vim:foldmethod=marker:foldlevel=0:foldmarker={{{,}}}
