@@ -63,7 +63,7 @@ set_from_resource $fg i3wm.foreground #f0f0f0
 set_from_resource $bg i3wm.background #f0f0f0
 
 # class                 border  backgr. text indicator 	child_border
-client.focused          $color5     $bg     $foreground  $color5				$color5
+client.focused          $color5     $bg     $fg  $color5				$color5
 client.focused_inactive $bg     $bg     $fg  $bg       	$bg
 client.unfocused        $bg     $bg     $fg  $bg       	$bg
 client.urgent           $bg     $bg     $fg  $bg       	$bg
@@ -229,3 +229,8 @@ exec dunst
 
 # always ontop
 bindsym $mod+t sticky toggle
+
+bindsym $mod+p exec playerctl next
+bindsym $mod+n exec playerctl previous
+bindsym $mod+space exec playerctl play-pause
+
