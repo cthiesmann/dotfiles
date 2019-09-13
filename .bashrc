@@ -11,6 +11,7 @@ source /home/christopher/.fzf.bash
 source /home/christopher/.fzf-key-bindings.bash
 
 alias fe='vim $(fzf)'
+alias vims='vim -S ~/session.vim'
 
 alias ls='ls --color=auto'
 alias lsa='ls --color=auto -a'

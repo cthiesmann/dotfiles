@@ -131,7 +131,7 @@ nnoremap <leader><space> :nohlsearch<CR>
 " bind ,u to gundo's undo tree
 nnoremap <leader>u :GundoToggle<CR>
 " save session (current windows), reopen with vim -S
-nnoremap <leader>s :mksession!<CR>
+nnoremap <leader>s :mksession! ~/session.vim<CR>
 " keybind for opening .vimrc
 nnoremap <leader>ev :vsp $MYVIMRC<CR>
 " keybind for reloading .vimrc
