@@ -199,6 +199,9 @@ exec nm-applet
 # Soundbar systray
 exec pasystray
 
+# Bluetooth systray
+exec blueman-applet
+
 # Keyboard layout workaround
 exec setxkbmap us
 
