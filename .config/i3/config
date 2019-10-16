@@ -239,6 +239,6 @@ bindsym $mod+space exec playerctl play-pause
 # Always ontop
 bindsym $mod+t sticky toggle
 # Mark the currently focused window secret
-bindsym $mod+Shift+minus mark secret
+bindsym $mod+Shift+minus mark secret; [con_mark="secret"] move scratchpad
 # Show the scratchpad window marked secret
 bindsym $mod+minus [con_mark="secret"] scratchpad show; focus mode_toggle
