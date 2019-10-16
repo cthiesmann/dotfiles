@@ -69,7 +69,7 @@ set number " show line numbers
 "set relativenumber " show relative line numbers
 set showcmd " shows command in bottom bar
 set cursorline " highlight current line
-set scrolloff=999 " number of screen lines to keep above and below the cursor
+set scrolloff=5 "999 for centered cursor" number of screen lines to keep above and below the cursor
 set sidescrolloff=999 " number of screen columns to keep left and right of the cursor
 set wildmenu " visual autocomplete for command menu
 "set lazyredraw " redraw only when we need to
