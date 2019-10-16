@@ -16,8 +16,8 @@ order += "wireless _first_"
 #order += "ethernet _first_"
 order += "battery all"
 #order += "disk /"
-#order += "load"
-#order += "memory"
+order += "load"
+order += "memory"
 order += "tztime local"
 
 wireless _first_ {
@@ -43,11 +43,11 @@ load {
 }
 
 memory {
-        format = "Mem: %used | %available"
+        format = "Mem: %used/%available"
         threshold_degraded = "1G"
         format_degraded = "MEMORY < %available"
 }
 
 tztime local {
-        format = "%Y-%m-%d %H:%M"
+        format = "%d.%m.%y %H:%M"
 }
