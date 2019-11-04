@@ -6,6 +6,7 @@
 [[ $- != *i* ]] && return
 
 export TERM=xterm-256color
+export EDITOR=/usr/bin/vim
 
 source /home/christopher/.fzf.bash
 source /home/christopher/.fzf-key-bindings.bash
@@ -40,6 +41,15 @@ git_status() {
     if [ -n "$STATUS" ]; then
         echo -ne "[$STATUS] "
 		fi
+}
+
+# Automatically adds sudo for pacman commands that require root
+pacman() {
+   case $1 in
+      -Ss|-Si) command pacman $@ || (yay $@) ;;
+      -S|-Sy*|-Sc*|-R*|-D|-U|-Fy*) sudo pacman $@ ;;
+      *) command pacman $@ ;;
+   esac
 }
 
 # Decent help article https://wiki.archlinux.org/index.php/Bash/Prompt_customization#Bash_escape_sequences
