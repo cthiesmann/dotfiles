@@ -166,7 +166,7 @@ workspace $ws6 output $scr2
 workspace $ws7 output $scr2
 workspace $ws8 output $scr2
 workspace $ws9 output $scr2
-workspace $ws0 output $scr2
+workspace $ws10 output $scr2
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
