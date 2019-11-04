@@ -154,6 +154,20 @@ bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10
 
+set $scr1 DP-0
+set $scr2 DVI-D-0
+
+workspace $ws1 output $scr1
+workspace $ws2 output $scr1
+workspace $ws3 output $scr1
+workspace $ws4 output $scr1
+workspace $ws5 output $scr1
+workspace $ws6 output $scr2
+workspace $ws7 output $scr2
+workspace $ws8 output $scr2
+workspace $ws9 output $scr2
+workspace $ws0 output $scr2
+
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
@@ -186,6 +200,7 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
         status_command i3status
+        tray_output primary
 	colors {
         	background $bg
         	statusline $fg 
