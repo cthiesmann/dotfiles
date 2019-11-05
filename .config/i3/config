@@ -257,3 +257,9 @@ bindsym $mod+t sticky toggle
 bindsym $mod+Shift+minus mark secret; [con_mark="secret"] move scratchpad
 # Show the scratchpad window marked secret
 bindsym $mod+minus [con_mark="secret"] scratchpad show; focus mode_toggle
+
+# Program workspace assignments
+assign [class="firefox"] $ws3
+assign [class="discord"] $ws10
+assign [class="skypeforlinux"] $ws10
+assign [class="whats-app-nativefier"] $ws10
