@@ -58,6 +58,7 @@ set shiftwidth=2 " number of spaces when shifting whole lines left/right
 set smarttab " ???
 "set expandtab " tabs are spaces
 set breakindent " start line wraps indneted
+set nowrap "disable line wrapping
 "add two spaces infront ofeach linebreak
 set showbreak=↳\ 
 filetype indent on " load filetype-specific indent files
